@@ -18,9 +18,15 @@ function App() {
         body: JSON.stringify({ rule }),
       });
       const responseData = await response.json();
+      if (!response.ok) {
+        alert(`Error creating rule: ${responseData.error}`);
+        return;
+      }
       console.log('AST:', responseData.ast);
       setAst(responseData.ast); // Store the AST for evaluation
+      alert("Single Rule Creation Succesfull!");
     } catch (error) {
+      alert('An error occurred while creating the rule. Please try again.');
       console.error('Error creating rule:', error);
     }
   };
@@ -35,16 +41,23 @@ function App() {
         body: JSON.stringify({ rules: rulesList }), // Send the combined rules
       });
       const responseData = await response.json();
+      if (!response.ok) {
+        alert(`Error combining rules: ${responseData.error}`);
+        return;
+      }
       console.log('Combined AST:', responseData.ast);
       setAst(responseData.ast); // Store the combined AST for evaluation
+      alert("Combined AST Creation Succesfull!");
     } catch (error) {
+      alert('An error occurred while combining rules. Please try again.');
       console.error('Error combining rules:', error);
     }
   };
 
-  const handleEvaluateRule = async () => {
+  const handleEvaluateCombinedRule = async () => {
     try {
       if (!ast || Object.keys(data).length === 0) {
+        alert('Please create rules and provide valid data for evaluation.');
         console.error('AST or data is not defined');
         return;
       }
@@ -54,32 +67,21 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ast, data }), // Use the stored AST and current data
-      });
-      const responseData = await response.json();
-      console.log('Evaluation Result:', responseData);
-      setResult(responseData.result); // Update the result state with evaluation result
-    } catch (error) {
-      console.error('Error evaluating rule:', error);
-    }
-  };
-  const handleEvaluateCombinedRule = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/evaluateRule', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ ast, data }), // ast is the combined AST from the previous step
       });
       const responseData = await response.json();
+      if (!response.ok) {
+        alert(`Error evaluating rule: ${responseData.error}`);
+        return;
+      }
       console.log('Evaluation Result:', responseData);
       setResult(responseData.result); // Update the result state with evaluation result
+  
     } catch (error) {
+      alert('An error occurred while evaluating the combined rule. Please try again.');
       console.error('Error evaluating combined rule:', error);
     }
   };
-  
 
   return (
     <div className="App">
@@ -103,7 +105,14 @@ function App() {
           placeholder="Enter complete rule to combine"
           onChange={(e) => setRule(e.target.value)}
         />
-        <button onClick={() => setRulesList([...rulesList, rule])} className='btn'>Add Rule</button>
+        <button onClick={() => {
+          if (rule.trim()) {
+            setRulesList([...rulesList, rule]);
+            setRule(''); // Clear input field after adding
+          } else {
+            alert('Please enter a valid rule.');
+          }
+        }} className='btn'>Add Rule</button>
         <button onClick={handleCombineRules} className='btn'>Combine Rules</button>
         <div>
           <h3>Rules to Combine:</h3>
@@ -125,6 +134,7 @@ function App() {
             } catch (err) {
               console.error('Invalid JSON format:', err);
               setData({}); // Reset data on error
+              alert('Invalid JSON format. Please check your input.');
             }
           }}
         ></textarea>
