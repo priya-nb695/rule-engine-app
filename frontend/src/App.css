@@ -1,0 +1,36 @@
+body{
+  margin:0;
+  padding:0;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color:#6ab4b6;
+}
+input {
+  width:40vw;
+  height:10vh;
+  margin: 5px 15px;
+  border-radius: 10px;
+  border:2px solid blue;
+}
+textarea{
+  width:40vw;
+  height:20vh;
+  margin: 5px 15px;
+  border-radius: 10px;
+  border:2px solid blue;
+}
+.btn{
+  height:40px;
+  width:100px;
+  border:2px solid rgb(74, 19, 12);
+  border-radius: 10px;
+  background-color: #793d77;
+  color:white;
+  margin:5px;
+}
+.eval-txt{
+  display: flex;
+  flex-direction: column;
+  gap:15px
+}
