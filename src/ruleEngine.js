@@ -69,25 +69,47 @@ function buildAST(tokens) {
 }
 
 // Function to combine multiple rules into a single AST
+// function combineRules(rules) {
+//     let combinedAst = null;
+
+//     for (const rule of rules) {
+//         const ast = createRule(rule);
+//         if (!combinedAst) {
+//             combinedAst = ast; // First rule becomes the root AST
+//         } else {
+//             combinedAst = {
+//                 type: 'operator',
+//                 value: 'AND', // Combine rules with AND operator
+//                 left: combinedAst,
+//                 right: ast
+//             };
+//         }
+//     }
+
+//     return combinedAst;
+// }
+
+
 function combineRules(rules) {
-    let combinedAst = null;
-
-    for (const rule of rules) {
-        const ast = createRule(rule);
-        if (!combinedAst) {
-            combinedAst = ast; // First rule becomes the root AST
-        } else {
-            combinedAst = {
-                type: 'operator',
-                value: 'AND', // Combine rules with AND operator
-                left: combinedAst,
-                right: ast
-            };
-        }
+    if (rules.length === 0) return null;
+  
+    // Assuming all rules are structured similarly for this example
+    const combinedAST = {
+      type: 'operator',
+      value: 'AND',
+      left: createRule(rules[0]), // First rule as left child
+      right: null,
+    };
+  
+    let currentNode = combinedAST;
+    for (let i = 1; i < rules.length; i++) {
+      currentNode.right = createRule(rules[i]); // Adding subsequent rules as right child
+      currentNode = currentNode.right; // Move to the new right node for chaining
     }
-
-    return combinedAst;
-}
+  
+    return combinedAST;
+  }
+  
 
 // Function to evaluate the AST against provided data
 function evaluateRule(ast, data) {

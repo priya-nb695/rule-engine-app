@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -37,10 +36,21 @@ app.post('/api/createRule', async (req, res) => {
 app.post('/api/evaluateRule', async (req, res) => {
   try {
     const { ast, data } = req.body;
-    console.log("reqbodyis",req.body)
+    console.log("reqbodyis", req.body);
     const result = evaluateRule(ast, data);
-    console.log("rs",result)
+    console.log("rs", result);
     res.status(200).json({ result });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// API to combine multiple rules
+app.post('/api/combineRules', async (req, res) => {
+  try {
+    const { rules } = req.body; // Expecting an array of rules
+    const combinedAST = combineRules(rules);
+    res.status(200).json({ ast: combinedAST });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
