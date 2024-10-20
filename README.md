@@ -5,44 +5,60 @@ A rule engine that allows users to create, combine, and evaluate rules based on 
 
 ## Installation Instructions
 1. Clone the repository: `https://github.com/priya-nb695/rule-engine-app.git`
-2. Navigate to the root directory and install dependencies: 
+  
+   git clone `https://github.com/priya-nb695/rule-engine-app.git`
+
+2. Install Monogodb for storing 
+
+   https://www.mongodb.com/try/download/community
+
+3. Navigate to the root directory and install dependencies: 
    
     cd rule-engine-app
     npm install
 
-3. Navigate to the frontend directory and install dependencies
+4. Navigate to the frontend directory and install dependencies
    
    cd frontend
    npm install
 
-4. Start the backend server:
+5. Start the backend server:
    
    npm start
+   or  
+   node src/index.js
 
-5. Start the frontend app:
+6. Start the frontend app:
 
    cd frontend
    npm start
 
+7. Test the TestCases
+   
+    npm test
+
+
 
 # Usage Instructions
+
 Use the UI to enter rules and evaluate them.
 Example rule: 
 
-     ((age > 30 AND department == 'Sales') OR (spend > 2000)) AND department == 'Marketing'
+     age > 30 AND department == 'Sales'
 
-    -- Enter this  above  Example input in Enter Rule field in UI and  click on Create Rule 
+    -- Enter this  above  Example input in Enter Rule field in UI and  click on Create Rule and click on  add  Rule buttons 
      
-      age > 44 AND department == 'marketing"
-    -- Add this kind of inputs in Add Rule Section and  again click on Create Rule then click on Combine Rules
+      income >= 50000 OR spend < 2000
+    -- Add this kind of  above inputs in Add Rule Section and  again click on Create Rule and click on  add  Rule buttons  then click on Combine Rules
 
         {
-           "age": 40,
-           "department": "Marketing",
-           "spend": 2500
+          "age": 35,
+          "department": "Sales",
+          "income": 60000,
+          "spend": 1500
          }
 
-      --Add this example data input in test Evaluation and test the Rule
+      --Add this above  example data input in test Evaluation and test the Rule (True will be printed)
 
 # API Endpoints
 POST /api/createRule: Create a new rule.
