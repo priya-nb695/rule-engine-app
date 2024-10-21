@@ -6,7 +6,7 @@ A rule engine that allows users to create, combine, and evaluate rules based on 
 ## Installation Instructions
 1. Clone the repository: `https://github.com/priya-nb695/rule-engine-app.git`
   
-   git clone `https://github.com/priya-nb695/rule-engine-app.git`
+   git clone https://github.com/priya-nb695/rule-engine-app.git
 
 2. Install Monogodb for storing 
 
@@ -47,9 +47,11 @@ Example rule:
      age > 30 AND department == 'Sales'
 
     -- Enter this  above  Example input in Enter Rule field in UI and  click on Create Rule and click on  add  Rule buttons 
-     
+     If the creation is  successful you will get  alert message
+
       income >= 50000 OR spend < 2000
-    -- Add this kind of  above inputs in Add Rule Section and  again click on Create Rule and click on  add  Rule buttons  then click on Combine Rules
+      
+    -- Add this kind of  above inputs in Add Rule field and  again click on Create Rule and click on  add  Rule buttons  then click on Combine Rules
 
         {
           "age": 35,
@@ -58,7 +60,7 @@ Example rule:
           "spend": 1500
          }
 
-      --Add this above  example data input in test Evaluation and test the Rule (True will be printed)
+      --Add this above  example data input in Test Evaluation field and click on Evaluate  (Result: True will be printed)
 
 # API Endpoints
 POST /api/createRule: Create a new rule.
@@ -86,6 +88,6 @@ Enhance the UI for better usability.
 Introduce additional rule types.
 
 # Error Handling: 
-App handles common errors usin try catch logic.
+App handles common errors using try catch logic.
 Provides  the alert messages for users about the errors.
 
