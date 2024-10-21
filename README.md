@@ -37,6 +37,14 @@ A rule engine that allows users to create, combine, and evaluate rules based on 
    
     npm test
 
+8. To test the api separately: Download and use Postman app
+             
+               https://www.postman.com/downloads/
+               
+               api endpoints:
+                 ‘/api/createRule’        Create a new rule ( POST)  .
+                 ‘/api/evaluateRule’    Evaluate a rule against provided data(POST ) .
+                 ‘/ api/combineRules’   Combine multiple rules into one(POST ) .
 
 
 # Usage Instructions
